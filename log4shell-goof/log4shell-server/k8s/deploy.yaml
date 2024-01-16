@@ -21,12 +21,18 @@ spec:
       labels:
         app: log4shell
     spec:
+      secuerityContext:
+        runAsNonRoot: true
       containers:
         - name: ldap
           image: ${DOCKER_ACCOUNT}/log4shell-server:latest
           imagePullPolicy: Always
           securityContext:
             allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            capabilities:
+              drop: 
+              - ALL
 ---
 apiVersion: v1
 kind: Service
